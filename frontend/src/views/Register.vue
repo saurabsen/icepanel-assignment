@@ -97,7 +97,6 @@ const email = ref("");
 const password = ref("");
 
 const register = async () => {
-  debugger;
   try {
     const response = await axios.post(`${backend_url}/auth/register`, {
       name: name.value,
