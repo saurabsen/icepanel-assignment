@@ -138,10 +138,8 @@ const login = async () => {
     });
     localStorage.setItem("user", JSON.stringify(response.data.user));
     localStorage.setItem("token", response.data.token);
-    setTimeout(() => {
-      loading.value = false;
-      router.push("/dashboard");
-    }, 10000);
+    loading.value = false;
+    router.push("/dashboard");
   } catch (error) {
     loading.value = false;
     console.error("Login error:", error);
