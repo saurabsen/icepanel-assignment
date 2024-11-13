@@ -256,5 +256,6 @@ const goToItemDetails = (id) => {
 onMounted(fetchItems);
 watch(route, () => {
   fetchItems();
+  location.reload();
 });
 </script>

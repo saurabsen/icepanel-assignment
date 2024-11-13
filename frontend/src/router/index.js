@@ -6,10 +6,22 @@ import ForgotPassword from "../views/ForgotPassword.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ItemDetails from "../views/ItemDetails.vue";
 import SplitBill from "../views/SplitBill.vue";
+import NotFoundComponent from "../views/NotFoundComponent.vue";
 
 const routes = [
+  {
+    path: "/",
+    redirect: "/login",
+  },
   { path: "/login", name: "Login", component: Login },
   { path: "/register", name: "Register", component: Register },
+  {
+    path: "/:catchAll(.*)",
+    component: NotFoundComponent,
+    meta: {
+      requiresAuth: false,
+    },
+  },
   {
     path: "/forgot-password",
     name: "ForgotPassword",
