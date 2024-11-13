@@ -38,15 +38,15 @@ To run this project locally:
 
 Navigate to both the frontend and server directories:
 
-    ```bash
-    cd frontend
-    npm install
-    ```
+```bash
+cd frontend
+npm install
+```
 
-    ```bash
-    cd ../server
-    npm install
-    ```
+```bash
+cd ../server
+npm install
+```
 
 ## Run the Application:
 
