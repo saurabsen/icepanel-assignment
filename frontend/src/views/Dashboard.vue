@@ -117,21 +117,29 @@
                   alt="image description"
                 />
               </div>
-              <p v-if="item.paidBy === user.id">
-                {{ item.name }} - ${{ item.amount }}
-              </p>
-              <p
+              <span
+                class="flex justify-between w-full"
+                v-if="item.paidBy === user.id"
+              >
+                <p>{{ item.name }}</p>
+                <p>${{ item.amount }}</p>
+              </span>
+              <span
+                class="flex justify-between w-full"
                 v-else-if="
                   item.splitBetween &&
                   item.splitBetween.length > 0 &&
                   item.splitBetween.some((split) => split.user === user.id)
                 "
               >
-                {{ item.name }} - ${{
-                  item.splitBetween.find((split) => split.user === user.id)
-                    .amountOwed
-                }}
-              </p>
+                <p>{{ item.name }}</p>
+                <p>
+                  ${{
+                    item.splitBetween.find((split) => split.user === user.id)
+                      .amountOwed
+                  }}
+                </p>
+              </span>
             </span>
           </div>
         </div>
@@ -240,7 +248,23 @@ const groupedItemsByDate = computed(() => {
 });
 
 const totalAmount = computed(() => {
-  return items.value.reduce((sum, item) => sum + item.amount, 0);
+  return items.value.reduce((sum, item) => {
+    if (item.paidBy === user.id) {
+      return sum + item.amount;
+    }
+
+    if (
+      item.splitBetween &&
+      item.splitBetween.length > 0 &&
+      item.splitBetween.some((split) => split.user === user.id)
+    ) {
+      const splitAmount = item.splitBetween.find(
+        (split) => split.user === user.id
+      ).amountOwed;
+      return sum + splitAmount;
+    }
+    return sum;
+  }, 0);
 });
 
 const daysRemainingInMonth = () => {
