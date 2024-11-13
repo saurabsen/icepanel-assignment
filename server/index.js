@@ -11,7 +11,7 @@ app.use(express.json());
 
 connectDB().catch((error) => {
   console.error("Database connection failed:", error);
-  process.exit(1); // Exit process if the database connection fails
+  process.exit(1);
 });
 
 app.use("/api", routes);
